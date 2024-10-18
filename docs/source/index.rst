@@ -29,7 +29,7 @@ Features
 -  ☒ Installable via pip
 -  ☒ Command-line interface
 -  ☒ Interactive documentation
--  ☐ Some new planned feature
+-  ☐ Dynamically generate logbooks
 
 Installation
 ------------

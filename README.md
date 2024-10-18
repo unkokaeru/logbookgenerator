@@ -20,7 +20,7 @@ Generates a logbook. Designed for the University of Lincoln's Scientific Computi
 - [x] Installable via pip
 - [x] Command-line interface
 - [x] Interactive documentation
-- [ ] Some new planned feature
+- [ ] Dynamically generate logbooks
 
 ## Installation
 

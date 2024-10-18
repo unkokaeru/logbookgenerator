@@ -2,6 +2,7 @@
 
 from logging import shutdown as shutdown_logging
 
+from .computation.context_generation import create_logbook_contexts
 from .computation.parsing import parse_input_directory
 from .config.constants import Constants
 from .interface.command_line import command_line_interface
@@ -38,13 +39,13 @@ def main() -> None:
     config = load_yaml(user_arguments["config_file"])
 
     # Parse through the input directory
-    cpp_files, references = parse_input_directory(user_arguments["input_directory"])
+    weekly_files, references = parse_input_directory(user_arguments["input_directory"])
 
     # Create the template contexts
-    # template_contexts = create_template_contexts(config, cpp_files, references)
+    logbook_contexts = create_logbook_contexts(config, weekly_files, references)
 
     # Create the logbook
-    # create_logbook(template_contexts, config)
+    # create_logbook(logbook_contexts, config)
 
     shutdown_logging()
 

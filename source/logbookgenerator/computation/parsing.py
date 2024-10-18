@@ -9,7 +9,7 @@ from . import logger
 logger = logger.getChild(__name__)
 
 
-def parse_weeks_directory(weeks_directory: Path) -> list[dict[str, str]]:
+def parse_weeks_directory(weeks_directory: Path) -> list[dict[str, dict[str, str] | str]]:
     """
     Parse the weeks directory.
 
@@ -20,21 +20,34 @@ def parse_weeks_directory(weeks_directory: Path) -> list[dict[str, str]]:
 
     Returns
     -------
-    list[dict[str, str]]
-        The CPP files.
+    list[dict[str, dict[str, str] | str]]
+        The CPP files and reflections for each week, given as a list of weeks,
+        where each week has keys "cpp" and "reflection", each containing a
+        dictionary of files or a string respectively.
     """
-    weeks_files: list[dict[str, str]] = []
+    weeks_files: list[dict[str, dict[str, str] | str]] = []
 
+    # Get the weeks, organised chronologically so that the dictionary is ordered
     weeks = sorted(os.listdir(weeks_directory))
 
     for week in weeks:
-        week_files: dict[str, str] = {}
+        week_files: dict[str, dict[str, str] | str] = {
+            "cpp": {},
+            "reflection": "",
+        }
         week_path = weeks_directory / week
 
+        # Parse CPP files
         for file_path in week_path.glob("*.cpp"):
             with open(file_path) as file:
-                week_files[file_path.stem] = file.read()
+                week_files["cpp"][file_path.stem] = file.read()  # type: ignore
 
+        # Parse reflection
+        reflection_path = week_path / "reflection.md"
+        with open(reflection_path) as file:
+            week_files["reflection"] = file.read()
+
+        # Add the week to the list
         weeks_files.append(week_files)
 
     return weeks_files
@@ -42,7 +55,7 @@ def parse_weeks_directory(weeks_directory: Path) -> list[dict[str, str]]:
 
 def parse_input_directory(
     input_directory: Path,
-) -> tuple[list[dict[str, str]], list[dict[str, str]]]:
+) -> tuple[list[dict[str, dict[str, str] | str]], list[dict[str, str]]]:
     """
     Parse the input directory.
 
@@ -53,8 +66,8 @@ def parse_input_directory(
 
     Returns
     -------
-    tuple[list[dict[str, str]], list[dict[str, str]]]
-        The CPP files and the references.
+    tuple[list[dict[str, dict[str, str] | str]], list[dict[str, str]]]
+        The weekly files (code and reflections) and the references.
     """
     weeks_path = input_directory / "weeks"
     weeks = parse_weeks_directory(weeks_path)

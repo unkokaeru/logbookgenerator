@@ -40,13 +40,30 @@ class Constants:
     TASK_ANNOTATION = dict[str, str | dict[str, list[tuple[str, str]]]]
     WEEK_ANNOTATION = dict[str, str | dict[Literal["lab", "extra"], dict[str, TASK_ANNOTATION]]]
 
+    # Format patterns
+    YEAR_FORMAT: str = r"^\d{4}$"
+    ID_FORMAT: str = r"^\d{8}$"
+    DATE_FORMAT: str = r"^\d{4}-\d{2}-\d{2}$"
+
+    # Config file constants
+    DEFAULT_MODULE_CODE: str = "MTH2008"
+    DEFAULT_MODULE_NAME: str = "Scientific Computing"
+    DEFAULT_STATEMENT_TEXT: str = (
+        "I confirm that this logbook is entirely my own work and that all references and "
+        "quotations, from both primary and secondary sources, have been fully identified "
+        "and properly acknowledged."
+    )
+    DEFAULT_UNIVERSITY_DEPARTMENT: str = "School of Engineering and Physical Sciences"
+    DEFAULT_UNIVERSITY_NAME: str = "University of Lincoln"
+    SEMESTER_CHOICES: list[str] = ["Semester A", "Semester B"]
+
     # Formatting
-    DATE_FORMAT = "%Y-%m-%d"
-    ANSWER_KEYWORD = "ANSWER"
-    INLINE_COMMENT_START = "/*"
-    BLOCK_COMMENT_START = "/**"
-    BLOCK_COMMENT_MIDDLE = "*"
-    COMMENT_END = "*/"
-    ANSWER_ID_DELIMITERS = "()"
-    INLINE_ANSWER_COMMENT = f"{ANSWER_KEYWORD} {r'\(Task (\d+).(\d+)\): (.+)'}"
-    CODE_COMMENT_DELIMITER = "```"
+    JINJA_DATE_FORMAT: str = "%Y-%m-%d"
+    ANSWER_KEYWORD: str = "ANSWER"
+    INLINE_COMMENT_START: str = "/*"
+    BLOCK_COMMENT_START: str = "/**"
+    BLOCK_COMMENT_MIDDLE: str = "*"
+    COMMENT_END: str = "*/"
+    ANSWER_ID_DELIMITERS: str = "()"
+    INLINE_ANSWER_COMMENT: str = f"{ANSWER_KEYWORD} {r'\(Task (\d+).(\d+)\): (.+)'}"
+    CODE_COMMENT_DELIMITER: str = "```"

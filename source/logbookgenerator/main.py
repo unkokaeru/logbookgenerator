@@ -8,7 +8,7 @@ from .computation.render_context import create_logbook
 from .config.constants import Constants
 from .interface.command_line import command_line_interface
 from .logs.setup_logging import setup_logging
-from .utilities.file_handling import load_yaml
+from .utilities.file_handling import load_yaml, save_file
 from .utilities.validation import validate_input_directory
 
 
@@ -49,7 +49,7 @@ def main() -> None:
     logbook_markdown = create_logbook(logbook_contexts)
 
     # Write the logbook to the output file
-    # save_file(user_arguments["output_file"], logbook_markdown)
+    save_file(user_arguments["output_file"], logbook_markdown)
 
     shutdown_logging()
 

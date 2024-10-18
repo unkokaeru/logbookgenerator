@@ -164,6 +164,16 @@ def command_line_interface() -> dict[str, Any]:
         help="Path to the directory containing the input files.",
     )  # Path to the input directory
 
+    argparser.add_argument(
+        "--output_file",
+        "-o",
+        action="store",
+        type=str,
+        required=False,
+        default="logbook.md",
+        help="Path to save the output file, should end in .md.",
+    )  # Path to the output file
+
     parsed_args = argparser.parse_args()
 
     # Create a dictionary to return the parsed arguments
@@ -172,6 +182,7 @@ def command_line_interface() -> dict[str, Any]:
         "verbose": parsed_args.verbose,
         "config_file": Path(parsed_args.config_file),
         "input_directory": Path(parsed_args.input_directory),
+        "output_file": Path(parsed_args.output_file),
     }
 
     logger.debug(f"Arguments: {arguments}")

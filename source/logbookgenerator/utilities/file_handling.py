@@ -32,3 +32,23 @@ def load_yaml(yaml_path: Path) -> dict[str, Any]:
         except yaml.YAMLError as error:
             logger.error(f"Error loading YAML file: {error}")
             raise error
+
+
+def save_file(file_path: Path, file_content: str) -> None:
+    """
+    Save the file.
+
+    Parameters
+    ----------
+    file_path : Path
+        Path to the file.
+    file_content : str
+        Content to save in the file.
+    """
+    # Create the parent directories if they do not exist
+    file_path.parent.mkdir(parents=True, exist_ok=True)
+
+    # Save the file
+    with open(file_path, "w") as file:
+        logger.debug(f"Saving file: {file_path}")
+        file.write(file_content)

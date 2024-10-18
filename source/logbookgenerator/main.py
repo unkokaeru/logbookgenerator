@@ -2,6 +2,7 @@
 
 from logging import shutdown as shutdown_logging
 
+from .computation.parsing import parse_input_directory
 from .config.constants import Constants
 from .interface.command_line import command_line_interface
 from .logs.setup_logging import setup_logging
@@ -37,7 +38,7 @@ def main() -> None:
     config = load_yaml(user_arguments["config_file"])
 
     # Parse through the input directory
-    # cpp_files, references = parse_input_directory(user_arguments["input_directory"])
+    cpp_files, references = parse_input_directory(user_arguments["input_directory"])
 
     # Create the template contexts
     # template_contexts = create_template_contexts(config, cpp_files, references)

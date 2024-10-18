@@ -5,6 +5,7 @@ from logging import shutdown as shutdown_logging
 from .config.constants import Constants
 from .interface.command_line import command_line_interface
 from .logs.setup_logging import setup_logging
+from .utilities.file_handling import load_yaml
 from .utilities.validation import validate_input_directory
 
 
@@ -33,7 +34,7 @@ def main() -> None:
     validate_input_directory(user_arguments["input_directory"])
 
     # Load the configuration file
-    # config = load_yaml(user_arguments["config_file"])
+    config = load_yaml(user_arguments["config_file"])
 
     # Parse through the input directory
     # cpp_files, references = parse_input_directory(user_arguments["input_directory"])

@@ -20,7 +20,7 @@ def main() -> None:
     -----
     This function is the entry point for the application, so only really
     contains overall control flow logic. The actual work is done in the
-    other modules.
+    other modules, usually.
     """
     # Get the arguments from the command line
     user_arguments = command_line_interface()

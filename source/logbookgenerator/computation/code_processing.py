@@ -104,8 +104,7 @@ def process_block_comment(
 
 def process_code_comments(code_lines: list[str]) -> dict[str, list[tuple[str, str]]] | str:
     """
-    Process the C++ code to extract answer comments and related code. If the code
-    contains no answer comments, the function returns the entire code as a string.
+    Process the C++ code to extract answer comments and related code.
 
     Parameters
     ----------

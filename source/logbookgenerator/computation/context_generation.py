@@ -1,14 +1,16 @@
 """context_generation.py: Contains the functions for generating the context for the logbook."""
 
+from datetime import datetime
 from typing import Any
 
+from ..config.constants import Constants
 from . import logger
 
 logger = logger.getChild(__name__)
 
 
 def generate_weeks_context(
-    weekly_files: list[dict[str, dict[str, str] | str]], start_date: str
+    weekly_files: list[dict[str, dict[str, str] | str]], start_date: datetime
 ) -> list[dict[str, Any]]:
     """
     Generate the weeks context.
@@ -17,7 +19,7 @@ def generate_weeks_context(
     ----------
     weekly_files: list[dict[str, dict[str, str] | str]]
         The weekly files, containing the CPP files and reflections.
-    start_date : str
+    start_date : datetime
         The start date of the university.
 
     Returns
@@ -53,7 +55,13 @@ def generate_logbook_contexts(
     logbook_contexts: dict[str, Any] = {}
 
     logbook_contexts["cover"] = config
-    logbook_contexts["weeks"] = generate_weeks_context(weekly_files, config["university"]["start"])
+
+    start_date = datetime.strptime(
+        config["university"]["start"],
+        Constants.DATE_FORMAT,
+    )
+    logbook_contexts["weeks"] = generate_weeks_context(weekly_files, start_date)
+
     logbook_contexts["references"] = references
 
     return logbook_contexts

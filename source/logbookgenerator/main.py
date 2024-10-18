@@ -5,6 +5,7 @@ from logging import shutdown as shutdown_logging
 from .config.constants import Constants
 from .interface.command_line import command_line_interface
 from .logs.setup_logging import setup_logging
+from .utilities.validation import validate_input_directory
 
 
 def main() -> None:
@@ -28,8 +29,20 @@ def main() -> None:
         ),
     )
 
-    # Main application logic
-    # TODO: Implement the main application logic
+    # Validate the structure of the input directory
+    validate_input_directory(user_arguments["input_directory"])
+
+    # Load the configuration file
+    # config = load_yaml(user_arguments["config_file"])
+
+    # Parse through the input directory
+    # cpp_files, references = parse_input_directory(user_arguments["input_directory"])
+
+    # Create the template contexts
+    # template_contexts = create_template_contexts(config, cpp_files, references)
+
+    # Create the logbook
+    # create_logbook(template_contexts, config)
 
     shutdown_logging()
 

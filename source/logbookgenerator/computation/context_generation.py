@@ -32,6 +32,7 @@ def generate_tasks_context(cpp_files: dict[str, str]) -> dict[str, Any]:
     # Iterate through the CPP files
     for file_name, file_content in cpp_files.items():
         # Extract information from the file name
+        logger.debug(f"Processing file: {file_name}")
         task_codeword, task_topic, task_name = file_name.split("-", maxsplit=2)
 
         # Clean up the extracted information
@@ -39,6 +40,9 @@ def generate_tasks_context(cpp_files: dict[str, str]) -> dict[str, Any]:
         task_number = task_codeword[1:]
         task_topic = task_topic.replace("_", " ").title()
         task_name = task_name.replace("_", " ").title()
+        logger.debug(
+            f"Task type: {task_type}, number: {task_number}, topic: {task_topic}, name: {task_name}"
+        )
 
         # Process the file content
         code_lines = file_content.splitlines()
@@ -49,11 +53,13 @@ def generate_tasks_context(cpp_files: dict[str, str]) -> dict[str, Any]:
             "name": task_name,
             "code": task_code_explanations,
         }
+        logger.debug(f"Task context: {tasks_context[task_type][task_number]}")
 
     # Sort the tasks by their number
     for task_type in tasks_context:
         tasks_context[task_type] = dict(sorted(tasks_context[task_type].items()))
 
+    logger.debug(f"Tasks context: {tasks_context}")
     return tasks_context
 
 
@@ -90,6 +96,7 @@ def generate_week_context(
         "tasks": generate_tasks_context(weekly_file["cpp"]),  # type: ignore
     }
 
+    logger.debug(f"Week {week_number} context: {week_context}")
     return week_context
 
 
@@ -113,6 +120,7 @@ def generate_weeks_context(
     """
     weeks_context: dict[str, Any] = {"weeks": {}}
     numbered_weekly_files = enumerate(weekly_files, start=1)
+    logger.debug(f"Numbered weekly files: {numbered_weekly_files}")
 
     for week_number, weekly_file in numbered_weekly_files:
         week_start_date = start_date + timedelta(weeks=week_number - 1)
@@ -155,13 +163,17 @@ def generate_logbook_contexts(
     logbook_contexts: dict[str, Any] = {}
 
     logbook_contexts["cover"] = config
+    logger.debug(f"Cover context: {logbook_contexts["cover"]}")
 
     start_date = datetime.strptime(
         config["university"]["start"],
         Constants.DATE_FORMAT,
     )
+    logger.debug(f"Start date: {start_date}")
     logbook_contexts["weeks"] = generate_weeks_context(weekly_files, start_date)
+    logger.debug(f"Weeks context: {logbook_contexts["weeks"]}")
 
     logbook_contexts["references"] = references
+    logger.debug(f"References context: {logbook_contexts["references"]}")
 
     return logbook_contexts

@@ -26,6 +26,7 @@ def load_yaml(yaml_path: Path) -> dict[str, Any]:
     """
     with open(yaml_path) as file:
         try:
+            logger.debug(f"Loading YAML file: {yaml_path}")
             yaml_dictionary: dict[str, Any] = yaml.safe_load(file)
             return yaml_dictionary
         except yaml.YAMLError as error:

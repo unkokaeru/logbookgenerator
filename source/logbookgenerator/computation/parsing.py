@@ -29,6 +29,7 @@ def parse_weeks_directory(weeks_directory: Path) -> list[dict[str, dict[str, str
 
     # Get the weeks, organised chronologically so that the dictionary is ordered
     weeks = sorted(os.listdir(weeks_directory))
+    logger.debug(f"Weeks found: {weeks}")
 
     for week in weeks:
         week_files: dict[str, dict[str, str] | str] = {
@@ -36,16 +37,19 @@ def parse_weeks_directory(weeks_directory: Path) -> list[dict[str, dict[str, str
             "reflection": "",
         }
         week_path = weeks_directory / week
+        logger.debug(f"Reading week from {week_path}")
 
         # Parse CPP files
         for file_path in week_path.glob("*.cpp"):
             with open(file_path) as file:
                 week_files["cpp"][file_path.stem] = file.read()  # type: ignore
+                logger.debug(f"Read file {file_path}")
 
         # Parse reflection
         reflection_path = week_path / "reflection.md"
         with open(reflection_path) as file:
             week_files["reflection"] = file.read()
+            logger.debug(f"Read reflection {reflection_path}")
 
         # Add the week to the list
         weeks_files.append(week_files)
@@ -70,10 +74,14 @@ def parse_input_directory(
         The weekly files (code and reflections) and the references.
     """
     weeks_path = input_directory / "weeks"
+    logger.debug(f"Reading weeks from {weeks_path}")
     weeks = parse_weeks_directory(weeks_path)
+    logger.debug(f"Read weeks: {weeks}")
 
     references_path = input_directory / "references.yaml"
+    logger.debug(f"Reading references from {references_path}")
     references_dictionary = load_yaml(references_path)
     references = references_dictionary["references"]
+    logger.debug(f"Read references: {references}")
 
     return weeks, references

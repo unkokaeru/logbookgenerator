@@ -29,6 +29,7 @@ def validate_year(year: str) -> str:
         If the year is not a four-digit number.
     """
     if re.match(Constants.YEAR_FORMAT, year):
+        logger.debug(f"Year {year} is valid.")
         return year
     raise ValueError("Year must be a four-digit number.")
 
@@ -53,6 +54,7 @@ def validate_student_id(student_id: str) -> str:
         If the student ID is not an eight-digit number.
     """
     if re.match(Constants.ID_FORMAT, student_id):
+        logger.debug(f"Student ID {student_id} is valid.")
         return student_id
     raise ValueError("Student ID must be an eight-digit number.")
 
@@ -77,6 +79,7 @@ def validate_date(date: str) -> str:
         If the date is not in the format YYYY-MM-DD.
     """
     if re.match(Constants.DATE_FORMAT, date):
+        logger.debug(f"Date {date} is valid.")
         return date
     raise ValueError("Date must be in the format YYYY-MM-DD.")
 
@@ -128,26 +131,31 @@ def validate_input_directory(input_directory: Path) -> None:
     """
     # Check if the input directory exists
     if not input_directory.exists():
+        logger.error(f"Input directory {input_directory} does not exist.")
         raise FileNotFoundError(f"Input directory {input_directory} does not exist.")
 
     # Check if the input directory is empty
     if not any(input_directory.iterdir()):
+        logger.error(f"Input directory {input_directory} is empty.")
         raise ValueError(f"Input directory {input_directory} is empty.")
 
     # Check if there is a weeks directory
     weeks_directory = input_directory / "weeks"
     if not weeks_directory.exists():
+        logger.error(f"Input directory {input_directory} does not have a weeks directory.")
         raise ValueError(f"Input directory {input_directory} does not have a weeks directory.")
 
     # Check if there is at least one week directory with at least one file
     week_directories = list(weeks_directory.glob("week*"))
     if not week_directories:
+        logger.error(f"Weeks directory {weeks_directory} does not have any week directories.")
         raise ValueError(f"Weeks directory {weeks_directory} does not have any week directories.")
 
     # Check if there is at least one file in each week directory
     for week_directory in week_directories:
         week_files = list(week_directory.glob("*.cpp"))
         if not week_files:
+            logger.error(f"Week directory {week_directory} does not have any week files.")
             raise ValueError(f"Week directory {week_directory} does not have any week files.")
 
     # Check if there is a coursework directory

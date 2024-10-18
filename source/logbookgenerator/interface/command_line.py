@@ -1,6 +1,5 @@
 """command_line.py: Command line interface for the application."""
 
-import logging
 from argparse import ArgumentDefaultsHelpFormatter, ArgumentParser
 from os import getcwd
 from pathlib import Path
@@ -14,9 +13,9 @@ from ..utilities.validation import (
     validate_student_id,
     validate_year,
 )
-from . import __version__
+from . import __version__, logger
 
-logger = logging.getLogger(__name__)
+logger = logger.getChild(__name__)
 
 
 def build_config_file() -> Path:

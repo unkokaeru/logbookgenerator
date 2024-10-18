@@ -8,11 +8,7 @@ from typing import Any
 import questionary
 
 from ..config.constants import Constants
-from ..utilities.validation import (
-    validate_date,
-    validate_student_id,
-    validate_year,
-)
+from ..utilities.validation import validate_date, validate_student_id, validate_year
 from . import __version__, logger
 
 logger = logger.getChild(__name__)

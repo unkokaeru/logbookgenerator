@@ -46,10 +46,12 @@ def process_inline_comment(
     )
 
     if not match:
+        logger.error(f"Invalid inline comment: {comment_line}")
         raise ValueError(f"Invalid inline comment: {comment_line}")
 
     comment_id = f"task_{match.group(1)}_{match.group(2)}"
     comment_content = match.group(3).strip()
+    logger.debug(f"Comment ID: {comment_id}, Comment content: {comment_content}")
 
     task_comments.setdefault(comment_id, [])
     task_comments[comment_id].append((comment_content, "\n".join(code_lines)))
@@ -86,11 +88,13 @@ def process_block_comment(
         If the block comment is empty.
     """
     if not comment_lines:
+        logger.error("Block comment is empty.")
         raise ValueError("Block comment is empty.")
 
     if comment_lines[0].startswith(Constants.ANSWER_KEYWORD):
         comment_id = extract_comment_id(comment_lines[0])
         comment_content = extract_comment_content(comment_lines)
+        logger.debug(f"Comment ID: {comment_id}, Comment content: {comment_content}")
 
         task_comments.setdefault(comment_id, [])
         task_comments[comment_id].append((comment_content, "\n".join(code_lines)))
@@ -120,23 +124,30 @@ def process_code_comments(code_lines: list[str]) -> dict[str, list[tuple[str, st
 
     while line_number < len(code_lines):
         line = code_lines[line_number].strip()
+        logger.debug(f"Processing line: {line}")
 
         if line.startswith(Constants.BLOCK_COMMENT_START):
+            logger.debug("Block comment found")
             line_number += 1  # Skip the block comment start line
             current_comment_lines, line_number = extract_block_comment(code_lines, line_number)
             current_comment_lines, current_code_lines, task_comments = process_block_comment(
                 current_comment_lines, current_code_lines, task_comments
             )
         elif line.startswith(Constants.INLINE_COMMENT_START):
+            logger.debug("Inline comment found")
             line, current_code_lines, task_comments = process_inline_comment(
                 line, current_code_lines, task_comments
             )
         else:
+            logger.debug("Code line found")
             current_code_lines.append(line)
 
         line_number += 1
+        logger.debug(f"Current code lines: {current_code_lines}")
 
     if task_comments:
+        logger.debug(f"Task comments: {task_comments}")
         return task_comments
 
+    logger.warning("No answer comments found, returning code as string")
     return "\n".join(current_code_lines)

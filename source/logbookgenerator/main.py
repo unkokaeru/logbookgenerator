@@ -2,8 +2,9 @@
 
 from logging import shutdown as shutdown_logging
 
-from .computation.context_generation import create_logbook_contexts
+from .computation.context_generation import generate_logbook_contexts
 from .computation.parsing import parse_input_directory
+from .computation.render_context import create_logbook
 from .config.constants import Constants
 from .interface.command_line import command_line_interface
 from .logs.setup_logging import setup_logging
@@ -42,10 +43,13 @@ def main() -> None:
     weekly_files, references = parse_input_directory(user_arguments["input_directory"])
 
     # Create the template contexts
-    logbook_contexts = create_logbook_contexts(config, weekly_files, references)
+    logbook_contexts = generate_logbook_contexts(config, weekly_files, references)
 
     # Create the logbook
-    # create_logbook(logbook_contexts, config)
+    logbook_markdown = create_logbook(logbook_contexts)
+
+    # Write the logbook to the output file
+    # save_file(user_arguments["output_file"], logbook_markdown)
 
     shutdown_logging()
 

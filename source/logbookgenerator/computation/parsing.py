@@ -28,7 +28,13 @@ def parse_weekly_directories(input_directory: Path) -> list[dict[str, dict[str, 
     weeks_files: list[dict[str, dict[str, str] | str]] = []
 
     # Get the weeks, organised chronologically so that the dictionary is ordered
-    weeks = sorted(os.listdir(input_directory))
+    weeks = sorted(
+        [
+            directory
+            for directory in os.listdir(input_directory)
+            if directory.startswith("week") and (input_directory / directory).is_dir()
+        ]
+    )
     logger.debug(f"Weeks found: {weeks}")
 
     for week in weeks:

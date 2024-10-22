@@ -33,6 +33,8 @@
 
 ### Fixes
 
+* Standardise section separation. [unkokaeru]
+
 * Correct defaults. [unkokaeru]
 
 * Context should be dict not list. [unkokaeru]
@@ -82,6 +84,10 @@
 * Logging. [unkokaeru]
 
 ### Chore
+
+* Bump version from 1.0.9 to 1.0.10. [unkokaeru]
+
+* Update changelog. [unkokaeru]
 
 * Bump version from 1.0.8 to 1.0.9. [unkokaeru]
 

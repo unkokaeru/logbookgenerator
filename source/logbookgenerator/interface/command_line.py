@@ -54,6 +54,7 @@ def command_line_interface() -> dict[str, Any]:
         action="store",
         type=str,
         required=False,
+        default=getcwd() + "/config/config.yaml",
         help="Path to the YAML configuration file.",
     )  # Path to the configuration file
 
@@ -63,7 +64,7 @@ def command_line_interface() -> dict[str, Any]:
         action="store",
         type=str,
         required=False,
-        default=getcwd(),
+        default=getcwd() + "/weeks/",
         help="Path to the directory containing the input files.",
     )  # Path to the input directory
 
@@ -73,7 +74,7 @@ def command_line_interface() -> dict[str, Any]:
         action="store",
         type=str,
         required=False,
-        default="logbook.md",
+        default=getcwd() + "/renders/logbook.md",
         help="Path to save the output file, should end in .md.",
     )  # Path to the output file
 

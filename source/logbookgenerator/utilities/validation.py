@@ -105,24 +105,23 @@ def validate_input_directory(input_directory: Path) -> None:
     Validates an expected structure of:
     ```
     input_directory/
-    ├── weeks/
-    │   ├── coursework/
-    |   │   ├── coursework1.cpp
-    |   │   ├── coursework2.cpp
-    |   |   └── ...
-    │   ├── week 1/
-    |   │   ├── e01-some_text-some_text.cpp
-    |   │   ├── l01-some_text-some_text.cpp
-    |   │   ├── l02-some_text-some_text.cpp
-    |   │   ├── ...
-    |   |   └── reflection.md
-    │   ├── week 2/
-    |   │   ├── e01-some_text-some_text.cpp
-    |   │   ├── l01-some_text-some_text.cpp
-    |   │   ├── l02-some_text-some_text.cpp
-    |   │   ├── ...
-    |   |   └── reflection.md
-    │   └── ...
+    ├── coursework/
+    |   ├── coursework1.cpp
+    |   ├── coursework2.cpp
+    |   └── ...
+    ├── week 1/
+    |   ├── e01-some_text-some_text.cpp
+    |   ├── l01-some_text-some_text.cpp
+    |   ├── l02-some_text-some_text.cpp
+    |   ├── ...
+    |   └── reflection.md
+    ├── week 2/
+    |   ├── e01-some_text-some_text.cpp
+    |   ├── l01-some_text-some_text.cpp
+    |   ├── l02-some_text-some_text.cpp
+    |   ├── ...
+    |   └── reflection.md
+    ├── ...
     └── references.yaml
     ```
     If the coursework directory is missing, it'll cause a warning but still continue.
@@ -139,17 +138,11 @@ def validate_input_directory(input_directory: Path) -> None:
         logger.error(f"Input directory {input_directory} is empty.")
         raise ValueError(f"Input directory {input_directory} is empty.")
 
-    # Check if there is a weeks directory
-    weeks_directory = input_directory / "weeks"
-    if not weeks_directory.exists():
-        logger.error(f"Input directory {input_directory} does not have a weeks directory.")
-        raise ValueError(f"Input directory {input_directory} does not have a weeks directory.")
-
     # Check if there is at least one week directory with at least one file
-    week_directories = list(weeks_directory.glob("week*"))
+    week_directories = list(input_directory.glob("week*"))
     if not week_directories:
-        logger.error(f"Weeks directory {weeks_directory} does not have any week directories.")
-        raise ValueError(f"Weeks directory {weeks_directory} does not have any week directories.")
+        logger.error(f"Input directory {input_directory} does not have any week directories.")
+        raise ValueError(f"Input directory {input_directory} does not have any week directories.")
 
     # Check if there is at least one file in each week directory
     for week_directory in week_directories:
@@ -159,9 +152,9 @@ def validate_input_directory(input_directory: Path) -> None:
             raise ValueError(f"Week directory {week_directory} does not have any week files.")
 
     # Check if there is a coursework directory
-    coursework_directory = weeks_directory / "coursework"
+    coursework_directory = input_directory / "coursework"
     if not coursework_directory.exists():
-        logger.warning(f"Weeks directory {weeks_directory} does not have a coursework directory.")
+        logger.warning(f"Weeks directory {input_directory} does not have a coursework directory.")
 
     # Check if there is a coursework file
     coursework_files = list(coursework_directory.glob("*.cpp"))

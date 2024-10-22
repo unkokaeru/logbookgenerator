@@ -2,6 +2,8 @@
 
 from logging import shutdown as shutdown_logging
 
+from yaml import YAMLError
+
 from .computation.config_generation import build_config_file
 from .computation.context_generation import generate_logbook_contexts
 from .computation.parsing import parse_input_directory
@@ -38,9 +40,11 @@ def main() -> None:
     validate_input_directory(user_arguments["input_directory"])
 
     # Load the configuration file
-    if user_arguments["config_file"] is None:
-        user_arguments["config_file"] = build_config_file()
-    config = load_yaml(user_arguments["config_file"])  # type: ignore
+    try:
+        config = load_yaml(user_arguments["config_file"])
+    except YAMLError:
+        config_file = build_config_file()
+        config = load_yaml(config_file)
 
     # Parse through the input directory
     weekly_files, references = parse_input_directory(user_arguments["input_directory"])

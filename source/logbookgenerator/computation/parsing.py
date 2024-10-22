@@ -9,14 +9,14 @@ from . import logger
 logger = logger.getChild(__name__)
 
 
-def parse_weeks_directory(weeks_directory: Path) -> list[dict[str, dict[str, str] | str]]:
+def parse_weekly_directories(input_directory: Path) -> list[dict[str, dict[str, str] | str]]:
     """
     Parse the weeks directory.
 
     Parameters
     ----------
-    weeks_directory : Path
-        Path to the weeks directory.
+    input_directory : Path
+        Path to the input directory.
 
     Returns
     -------
@@ -28,7 +28,7 @@ def parse_weeks_directory(weeks_directory: Path) -> list[dict[str, dict[str, str
     weeks_files: list[dict[str, dict[str, str] | str]] = []
 
     # Get the weeks, organised chronologically so that the dictionary is ordered
-    weeks = sorted(os.listdir(weeks_directory))
+    weeks = sorted(os.listdir(input_directory))
     logger.debug(f"Weeks found: {weeks}")
 
     for week in weeks:
@@ -36,7 +36,7 @@ def parse_weeks_directory(weeks_directory: Path) -> list[dict[str, dict[str, str
             "cpp": {},
             "reflection": "",
         }
-        week_path = weeks_directory / week
+        week_path = input_directory / week
         logger.debug(f"Reading week from {week_path}")
 
         # Parse CPP files
@@ -73,9 +73,8 @@ def parse_input_directory(
     tuple[list[dict[str, dict[str, str] | str]], list[dict[str, str]]]
         The weekly files (code and reflections) and the references.
     """
-    weeks_path = input_directory / "weeks"
-    logger.debug(f"Reading weeks from {weeks_path}")
-    weeks = parse_weeks_directory(weeks_path)
+    logger.debug(f"Reading weeks from {input_directory}")
+    weeks = parse_weekly_directories(input_directory)
     logger.debug(f"Read weeks: {weeks}")
 
     references_path = input_directory / "references.yaml"

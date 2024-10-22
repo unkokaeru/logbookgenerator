@@ -49,4 +49,9 @@ class Paths:
     TEMPLATES_PATH = temp_dir
 
 
+def cleanup_temporary_files() -> None:
+    """Cleanup temporary files."""
+    shutil.rmtree(Paths.temp_dir)
+
+
 Paths.temporary_clone("logbookgenerator.templates")

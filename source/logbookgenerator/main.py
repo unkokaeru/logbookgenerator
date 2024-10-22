@@ -9,6 +9,7 @@ from .computation.context_generation import generate_logbook_contexts
 from .computation.parsing import parse_input_directory
 from .computation.render_context import create_logbook
 from .config.constants import Constants
+from .config.paths import cleanup_temporary_files
 from .interface.command_line import command_line_interface
 from .logs.setup_logging import setup_logging
 from .utilities.file_handling import load_yaml, save_file
@@ -64,4 +65,10 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        shutdown_logging()
+        cleanup_temporary_files()
+        raise e

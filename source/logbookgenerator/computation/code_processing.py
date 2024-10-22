@@ -35,19 +35,14 @@ def process_inline_comment(
     -------
     tuple[str, list[str], dict[str, list[tuple[str, str]]]]
         The updated comment line, code lines, and task comments.
-
-    Raises
-    ------
-    ValueError
-        If the inline comment is invalid.
     """
     match = re.match(
         Constants.INLINE_ANSWER_COMMENT, comment_line.strip(f"{Constants.INLINE_COMMENT_START} ")
     )
 
     if not match:
-        logger.error(f"Invalid inline comment: {comment_line}")
-        raise ValueError(f"Invalid inline comment: {comment_line}")
+        logger.debug(f"No match found for inline comment: {comment_line}")
+        return "", [], task_comments
 
     comment_id = f"task_{match.group(1)}_{match.group(2)}"
     comment_content = match.group(3).strip()

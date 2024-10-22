@@ -106,7 +106,7 @@ def create_logbook(logbook_contexts: dict[str, Any]) -> str:
     logger.debug("Rendering the logbook references.")
     logbook_markdown += render_template(
         Paths.TEMPLATES_PATH / "references.md.j2",
-        logbook_contexts["references"],
+        {"references": logbook_contexts["references"]},
     )
 
     return logbook_markdown

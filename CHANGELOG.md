@@ -33,6 +33,8 @@
 
 ### Fixes
 
+* Only parse true week directories. [unkokaeru]
+
 * Minimal change to trigger push command. [unkokaeru]
 
 * No longer generates config on every run. [unkokaeru]
@@ -50,6 +52,12 @@
 * Logging. [unkokaeru]
 
 ### Chore
+
+* Bump version from 1.0.1 to 1.0.2. [unkokaeru]
+
+* Update changelog. [unkokaeru]
+
+* Added github issue links to todo comments. [github-actions[bot]]
 
 * Bump version from 1.0.0 to 1.0.1. [unkokaeru]
 

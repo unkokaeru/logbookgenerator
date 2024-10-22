@@ -33,6 +33,8 @@
 
 ### Fixes
 
+* Fix inline comment matching logic. [unkokaeru]
+
 * Date formatting and naming. [unkokaeru]
 
 * Only parse true week directories. [unkokaeru]
@@ -54,6 +56,10 @@
 * Logging. [unkokaeru]
 
 ### Chore
+
+* Bump version from 1.0.3 to 1.0.4. [unkokaeru]
+
+* Update changelog. [unkokaeru]
 
 * Bump version from 1.0.2 to 1.0.3. [unkokaeru]
 

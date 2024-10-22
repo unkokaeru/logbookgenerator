@@ -99,7 +99,7 @@ def create_logbook(logbook_contexts: dict[str, Any]) -> str:
                 Paths.TEMPLATES_PATH / "week.md.j2",
                 week,
             )
-            + "\n\n\n\n"
+            + "\n\\newpage\n"
         )
         logger.debug(f"Rendered week {week['number']}.")
 

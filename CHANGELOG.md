@@ -33,6 +33,8 @@
 
 ### Fixes
 
+* Error handling when rendering contexts. [unkokaeru]
+
 * Use datetime formatting rather than regex when using library. [unkokaeru]
 
 * Fix inline comment matching logic. [unkokaeru]
@@ -58,6 +60,10 @@
 * Logging. [unkokaeru]
 
 ### Chore
+
+* Bump version from 1.0.5 to 1.0.6. [unkokaeru]
+
+* Update changelog. [unkokaeru]
 
 * Update requirement files. [unkokaeru]
 

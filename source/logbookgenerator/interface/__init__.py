@@ -1,6 +1,6 @@
 """Interface package for the project."""
 
-__version__ = "1.0.7"
+__version__ = "1.0.8"
 
 import logging
 

@@ -118,7 +118,7 @@ def generate_weeks_context(
     dict[str, Any]
         The weeks context.
     """
-    weeks_context: dict[str, Any] = {"weeks": {}}
+    weeks_context: dict[str, Any] = {}
     numbered_weekly_files = enumerate(weekly_files, start=1)
     logger.debug(f"Numbered weekly files: {numbered_weekly_files}")
 
@@ -133,7 +133,7 @@ def generate_weeks_context(
             weekly_file,
         )
 
-        weeks_context["weeks"][str(week_number)] = week_context
+        weeks_context[str(week_number)] = week_context
 
     return weeks_context
 

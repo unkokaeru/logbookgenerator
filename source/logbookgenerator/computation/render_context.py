@@ -88,7 +88,7 @@ def create_logbook(logbook_contexts: dict[str, Any]) -> str:
 
     logger.debug("Rendering the logbook weekly entries.")
     for week in logbook_contexts["weeks"].values():
-        logger.debug(f"Rendering week {week['week_number']} with context {week}.")
+        logger.debug(f"Rendering week {week['number']} with context {week}.")
         logbook_markdown += (
             render_template(
                 Paths.TEMPLATES_PATH / "week.md.j2",
@@ -96,7 +96,7 @@ def create_logbook(logbook_contexts: dict[str, Any]) -> str:
             )
             + "\\newpage"
         )
-        logger.debug(f"Rendered week {week['week_number']}.")
+        logger.debug(f"Rendered week {week['number']}.")
 
     logger.debug("Rendering the logbook references.")
     logbook_markdown += render_template(

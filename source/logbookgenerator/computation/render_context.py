@@ -34,8 +34,6 @@ def render_template(template_path: Path, context: dict[str, Any]) -> str:
     jinja2.exceptions.TemplateSyntaxError
         If there is a syntax error in the template.
     """
-    logger.debug(f"Rendering the template at {template_path}.")
-
     if not template_path.exists():
         logger.error(f"Template at {template_path} does not exist.")
         raise FileNotFoundError(f"Template at {template_path} does not exist.")
@@ -47,8 +45,11 @@ def render_template(template_path: Path, context: dict[str, Any]) -> str:
         logger.error(f"Error in the template at {template_path}: {e}")
         raise e
 
+    logger.debug(f"Rendering the template at {template_path}.")
+    rendered_template = template.render(context)
     logger.debug(f"Rendered the template at {template_path}.")
-    return template.render(context)
+
+    return rendered_template
 
 
 def create_logbook(logbook_contexts: dict[str, Any]) -> str:

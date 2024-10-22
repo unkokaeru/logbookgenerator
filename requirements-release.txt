@@ -43,7 +43,7 @@ secretstorage==3.3.3 ; python_version >= "3.10" and python_version < "4.0" and s
 shellingham==1.5.4 ; python_version >= "3.10" and python_version < "4.0"
 tomli==2.0.2 ; python_version >= "3.10" and python_version < "3.11"
 tomlkit==0.13.2 ; python_version >= "3.10" and python_version < "4.0"
-trove-classifiers==2024.10.16 ; python_version >= "3.10" and python_version < "4.0"
+trove-classifiers==2024.10.21.16 ; python_version >= "3.10" and python_version < "4.0"
 typing-extensions==4.12.2 ; python_version >= "3.10" and python_version < "4.0"
 urllib3==2.2.3 ; python_version >= "3.10" and python_version < "4.0"
 virtualenv==20.27.0 ; python_version >= "3.10" and python_version < "4.0"

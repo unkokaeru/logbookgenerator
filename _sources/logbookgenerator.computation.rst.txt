@@ -20,6 +20,14 @@ logbookgenerator.computation.comment\_extraction module
    :undoc-members:
    :show-inheritance:
 
+logbookgenerator.computation.config\_generation module
+------------------------------------------------------
+
+.. automodule:: logbookgenerator.computation.config_generation
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 logbookgenerator.computation.context\_generation module
 -------------------------------------------------------
 

@@ -90,8 +90,8 @@ def generate_week_context(
     """
     week_context: dict[str, Any] = {
         "number": week_number,
-        "start_date": week_start_date.strftime(Constants.DATE_FORMAT),
-        "end_date": week_end_date.strftime(Constants.DATE_FORMAT),
+        "start_date": week_start_date.strftime(Constants.DATE_REGEX_FORMAT),
+        "end_date": week_end_date.strftime(Constants.DATE_REGEX_FORMAT),
         "reflection": weekly_file["reflection"],
         "tasks": generate_tasks_context(weekly_file["cpp"]),  # type: ignore
     }
@@ -167,7 +167,7 @@ def generate_logbook_contexts(
 
     start_date = datetime.strptime(
         config["university"]["start"],
-        Constants.DATE_FORMAT,
+        Constants.DATE_DATETIME_FORMAT,
     )
     logger.debug(f"Start date: {start_date}")
     logbook_contexts["weeks"] = generate_weeks_context(weekly_files, start_date)

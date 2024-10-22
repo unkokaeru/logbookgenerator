@@ -28,7 +28,7 @@ def validate_year(year: str) -> str:
     ValueError
         If the year is not a four-digit number.
     """
-    if re.match(Constants.YEAR_FORMAT, year):
+    if re.match(Constants.YEAR_REGEX_FORMAT, year):
         logger.debug(f"Year {year} is valid.")
         return year
     raise ValueError("Year must be a four-digit number.")
@@ -53,7 +53,7 @@ def validate_student_id(student_id: str) -> str:
     ValueError
         If the student ID is not an eight-digit number.
     """
-    if re.match(Constants.ID_FORMAT, student_id):
+    if re.match(Constants.ID_REGEX_FORMAT, student_id):
         logger.debug(f"Student ID {student_id} is valid.")
         return student_id
     raise ValueError("Student ID must be an eight-digit number.")
@@ -78,7 +78,7 @@ def validate_date(date: str) -> str:
     ValueError
         If the date is not in the format YYYY-MM-DD.
     """
-    if re.match(Constants.DATE_FORMAT, date):
+    if re.match(Constants.DATE_REGEX_FORMAT, date):
         logger.debug(f"Date {date} is valid.")
         return date
     raise ValueError("Date must be in the format YYYY-MM-DD.")

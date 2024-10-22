@@ -41,9 +41,10 @@ class Constants:
     WEEK_ANNOTATION = dict[str, str | dict[Literal["lab", "extra"], dict[str, TASK_ANNOTATION]]]
 
     # Format patterns
-    YEAR_FORMAT: str = r"^\d{4}$"
-    ID_FORMAT: str = r"^\d{8}$"
-    DATE_FORMAT: str = r"^\d{4}-\d{2}-\d{2}$"
+    YEAR_REGEX_FORMAT: str = r"^\d{4}$"
+    ID_REGEX_FORMAT: str = r"^\d{8}$"
+    DATE_REGEX_FORMAT: str = r"^\d{4}-\d{2}-\d{2}$"
+    DATE_DATETIME_FORMAT: str = "%Y-%m-%d"
 
     # Config file constants
     DEFAULT_MODULE_CODE: str = "MTH2008"

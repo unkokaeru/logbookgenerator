@@ -90,8 +90,8 @@ def generate_week_context(
     """
     week_context: dict[str, Any] = {
         "number": week_number,
-        "start_date": week_start_date.strftime(Constants.DATE_REGEX_FORMAT),
-        "end_date": week_end_date.strftime(Constants.DATE_REGEX_FORMAT),
+        "start_date": week_start_date.strftime(Constants.DATE_DATETIME_FORMAT),
+        "end_date": week_end_date.strftime(Constants.DATE_DATETIME_FORMAT),
         "reflection": weekly_file["reflection"],
         "tasks": generate_tasks_context(weekly_file["cpp"]),  # type: ignore
     }

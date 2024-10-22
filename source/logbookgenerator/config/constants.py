@@ -35,6 +35,9 @@ class Constants:
 
     # Default values
     DEFAULT_LOG_SAVE_PATH: Path = Path("logbookgenerator_log.txt")
+    DEFAULT_INPUT_DIRECTORY: Path = Path("weeks")
+    DEFAULT_CONFIG_FILE: Path = Path("config.yaml")
+    DEFAULT_OUTPUT_FILE: Path = Path("renders/logbook.md")
 
     # Type hints
     TASK_ANNOTATION = dict[str, str | dict[str, list[tuple[str, str]]]]

@@ -33,6 +33,8 @@
 
 ### Fixes
 
+* Use datetime formatting rather than regex when using library. [unkokaeru]
+
 * Fix inline comment matching logic. [unkokaeru]
 
 * Date formatting and naming. [unkokaeru]
@@ -56,6 +58,14 @@
 * Logging. [unkokaeru]
 
 ### Chore
+
+* Update requirement files. [unkokaeru]
+
+* Update lock file. [unkokaeru]
+
+* Bump version from 1.0.4 to 1.0.5. [unkokaeru]
+
+* Update changelog. [unkokaeru]
 
 * Bump version from 1.0.3 to 1.0.4. [unkokaeru]
 

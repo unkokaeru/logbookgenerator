@@ -79,7 +79,7 @@ def create_logbook(logbook_contexts: dict[str, Any]) -> str:
             Paths.TEMPLATES_PATH / "cover.md.j2",
             logbook_contexts["cover"],
         )
-        + "\n"
+        + "\n\n"
     )
 
     logger.debug("Rendering the logbook table of contents.")
@@ -88,7 +88,7 @@ def create_logbook(logbook_contexts: dict[str, Any]) -> str:
             Paths.TEMPLATES_PATH / "contents.md.j2",
             {"weeks": logbook_contexts["weeks"]},
         )
-        + "\\newpage"
+        + "\n\\newpage"
     )
 
     logger.debug("Rendering the logbook weekly entries.")
@@ -99,7 +99,7 @@ def create_logbook(logbook_contexts: dict[str, Any]) -> str:
                 Paths.TEMPLATES_PATH / "week.md.j2",
                 week,
             )
-            + "\\newpage"
+            + "\n\n\n\n"
         )
         logger.debug(f"Rendered week {week['number']}.")
 

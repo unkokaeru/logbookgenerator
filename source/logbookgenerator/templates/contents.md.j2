@@ -7,5 +7,3 @@
 | &nbsp;&nbsp;&nbsp;&nbsp;{{ week.number }}.{{ loop.index }} [{{ lab.topic }}: {{ lab.name }}](#{{ lab.topic | lower | replace(' ', '-') }}-{{ lab.name | lower | replace(' ', '-') }}) | {{ count.value }}        |{% set count.value = count.value + 1 %}{% endfor %}{% for extra_key, extra in week.tasks.extra.items() %} 
 | &nbsp;&nbsp;&nbsp;&nbsp;*{{ week.number }}.{{ loop.index + week.tasks.lab|length }} [{{ extra.topic }}: {{ extra.name }}](#{{ extra.topic | lower | replace(' ', '-') }}-{{ extra.name | lower | replace(' ', '-') }})* | {{ count.value }}        |{% set count.value = count.value + 1 %}{% endfor %}{% endfor %}
 | **[References](#references)**                                                   | {{ count.value }}        |
-
-\newpage

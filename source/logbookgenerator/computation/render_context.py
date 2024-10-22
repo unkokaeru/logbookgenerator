@@ -88,7 +88,7 @@ def create_logbook(logbook_contexts: dict[str, Any]) -> str:
             Paths.TEMPLATES_PATH / "contents.md.j2",
             {"weeks": logbook_contexts["weeks"]},
         )
-        + "\n\\newpage"
+        + "\n\\newpage\n"
     )
 
     logger.debug("Rendering the logbook weekly entries.")

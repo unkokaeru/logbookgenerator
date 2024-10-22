@@ -33,6 +33,8 @@
 
 ### Fixes
 
+* No longer generates config on every run. [unkokaeru]
+
 * Github todo to isse action. [unkokaeru]
 
 * Dependencies. [unkokaeru]
@@ -46,6 +48,14 @@
 * Logging. [unkokaeru]
 
 ### Chore
+
+* Update requirement files. [unkokaeru]
+
+* Update lock file. [unkokaeru]
+
+* Bump version from 0.1.0 to 1.0.0. [unkokaeru]
+
+* Update changelog. [unkokaeru]
 
 * Update requirement files. [unkokaeru]
 

@@ -33,6 +33,20 @@
 
 ### Fixes
 
+* Context should be dict not list. [unkokaeru]
+
+* Handle empty references better. [unkokaeru]
+
+* Error message. [unkokaeru]
+
+* Error handling for incorrect contexts. [unkokaeru]
+
+* Rendering debug order. [unkokaeru]
+
+* Week number key. [unkokaeru]
+
+* Interaction with weeks dictionary. [unkokaeru]
+
 * Add debugging to find rendering bug. [unkokaeru]
 
 * Week context structure. [unkokaeru]
@@ -66,6 +80,10 @@
 * Logging. [unkokaeru]
 
 ### Chore
+
+* Bump version from 1.0.7 to 1.0.8. [unkokaeru]
+
+* Update changelog. [unkokaeru]
 
 * Update requirement files. [unkokaeru]
 

@@ -40,43 +40,6 @@
 <span id="logbookgenerator-interface-command-line-module"></span><h2>logbookgenerator.interface.command_line module<a class="headerlink" href="#module-logbookgenerator.interface.command_line" title="Link to this heading">¶</a></h2>
 <p>command_line.py: Command line interface for the application.</p>
 <dl class="py function">
-<dt class="sig sig-object py" id="logbookgenerator.interface.command_line.build_config_file">
-<span class="sig-prename descclassname"><span class="pre">logbookgenerator.interface.command_line.</span></span><span class="sig-name descname"><span class="pre">build_config_file</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Path</span></span></span><a class="headerlink" href="#logbookgenerator.interface.command_line.build_config_file" title="Link to this definition">¶</a></dt>
-<dd><p>Builds the YAML config file with user input.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The path to the configuration file.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>Path</p>
-</dd>
-</dl>
-<p class="rubric">Notes</p>
-<p>The generated YAML file will have the following structure:
-<a href="#id1"><span class="problematic" id="id2">``</span></a>`
-—
-module:</p>
-<blockquote>
-<div><p>code: &lt;module_code&gt;
-name: &lt;module_name&gt;
-semester: &lt;module_semester&gt;
-year: &lt;module_year&gt;</p>
-</div></blockquote>
-<dl class="simple">
-<dt>statement:</dt><dd><p>text: &lt;statement_text&gt;</p>
-</dd>
-<dt>student:</dt><dd><p>id: &lt;student_id&gt;
-name: &lt;student_name&gt;</p>
-</dd>
-<dt>university:</dt><dd><p>department: &lt;university_department&gt;
-name: &lt;university_name&gt;
-start: &lt;university_start&gt;</p>
-</dd>
-</dl>
-<p><a href="#id3"><span class="problematic" id="id4">``</span></a><a href="#id5"><span class="problematic" id="id6">`</span></a></p>
-</dd></dl>
-
-<dl class="py function">
 <dt class="sig sig-object py" id="logbookgenerator.interface.command_line.command_line_interface">
 <span class="sig-prename descclassname"><span class="pre">logbookgenerator.interface.command_line.</span></span><span class="sig-name descname"><span class="pre">command_line_interface</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#logbookgenerator.interface.command_line.command_line_interface" title="Link to this definition">¶</a></dt>
 <dd><p>Takes arguments from the command line and returns them as a dictionary.</p>

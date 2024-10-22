@@ -33,6 +33,12 @@
 
 ### Fixes
 
+* Add debugging to find rendering bug. [unkokaeru]
+
+* Week context structure. [unkokaeru]
+
+* Always remove temp files. [unkokaeru]
+
 * Error handling when rendering contexts. [unkokaeru]
 
 * Use datetime formatting rather than regex when using library. [unkokaeru]
@@ -60,6 +66,14 @@
 * Logging. [unkokaeru]
 
 ### Chore
+
+* Update requirement files. [unkokaeru]
+
+* Update lock file. [unkokaeru]
+
+* Bump version from 1.0.6 to 1.0.7. [unkokaeru]
+
+* Update changelog. [unkokaeru]
 
 * Bump version from 1.0.5 to 1.0.6. [unkokaeru]
 

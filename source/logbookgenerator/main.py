@@ -48,6 +48,7 @@ def main() -> None:
 
     # Parse through the input directory
     weekly_files, references = parse_input_directory(user_arguments["input_directory"])
+    # TODO: Generalise functions to re-use for coursework generation
 
     # Create the template contexts
     logbook_contexts = generate_logbook_contexts(config, weekly_files, references)

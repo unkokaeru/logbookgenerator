@@ -33,6 +33,8 @@
 
 ### Fixes
 
+* Minimal change to trigger push command. [unkokaeru]
+
 * No longer generates config on every run. [unkokaeru]
 
 * Github todo to isse action. [unkokaeru]
@@ -48,6 +50,10 @@
 * Logging. [unkokaeru]
 
 ### Chore
+
+* Bump version from 1.0.0 to 1.0.1. [unkokaeru]
+
+* Update changelog. [unkokaeru]
 
 * Update requirement files. [unkokaeru]
 
@@ -80,6 +86,8 @@
 * Line length. [unkokaeru]
 
 ### Refactor
+
+* Simplify expected structure. [unkokaeru]
 
 * Organise for context generation. [unkokaeru]
 

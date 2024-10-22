@@ -1,6 +1,6 @@
 """Integrations package for the project."""
 
-__version__ = "1.0.2"
+__version__ = "1.0.3"
 
 import logging
 

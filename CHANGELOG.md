@@ -33,6 +33,8 @@
 
 ### Fixes
 
+* Correct defaults. [unkokaeru]
+
 * Context should be dict not list. [unkokaeru]
 
 * Handle empty references better. [unkokaeru]
@@ -80,6 +82,10 @@
 * Logging. [unkokaeru]
 
 ### Chore
+
+* Bump version from 1.0.8 to 1.0.9. [unkokaeru]
+
+* Update changelog. [unkokaeru]
 
 * Bump version from 1.0.7 to 1.0.8. [unkokaeru]
 

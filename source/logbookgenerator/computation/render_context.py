@@ -39,16 +39,19 @@ def render_template(template_path: Path, context: dict[str, Any]) -> str:
         raise FileNotFoundError(f"Template at {template_path} does not exist.")
 
     try:
+        logger.debug(f"Rendering the template at {template_path}.")
         with open(template_path) as file:
             template = jinja2.Template(file.read())
+
+        rendered_template = template.render(context)
     except jinja2.exceptions.TemplateSyntaxError as e:
         logger.error(f"Error in the template at {template_path}: {e}")
         raise e
+    except ValueError as e:
+        logger.error(f"Error in the context for the template at {template_path}: {e}")
+        raise e
 
-    logger.debug(f"Rendering the template at {template_path}.")
-    rendered_template = template.render(context)
     logger.debug(f"Rendered the template at {template_path}.")
-
     return rendered_template
 
 

@@ -26,10 +26,28 @@ def render_template(template_path: Path, context: dict[str, Any]) -> str:
     -------
     str
         Rendered template.
-    """
-    with open(template_path) as file:
-        template = jinja2.Template(file.read())
 
+    Raises
+    ------
+    FileNotFoundError
+        If the template does not exist.
+    jinja2.exceptions.TemplateSyntaxError
+        If there is a syntax error in the template.
+    """
+    logger.debug(f"Rendering the template at {template_path}.")
+
+    if not template_path.exists():
+        logger.error(f"Template at {template_path} does not exist.")
+        raise FileNotFoundError(f"Template at {template_path} does not exist.")
+
+    try:
+        with open(template_path) as file:
+            template = jinja2.Template(file.read())
+    except jinja2.exceptions.TemplateSyntaxError as e:
+        logger.error(f"Error in the template at {template_path}: {e}")
+        raise e
+
+    logger.debug(f"Rendered the template at {template_path}.")
     return template.render(context)
 
 

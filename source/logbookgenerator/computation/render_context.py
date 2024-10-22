@@ -49,6 +49,7 @@ def render_template(template_path: Path, context: dict[str, Any]) -> str:
         raise e
     except ValueError as e:
         logger.error(f"Error in the context for the template at {template_path}: {e}")
+        logger.error(f"Context: {context}")
         raise e
 
     logger.debug(f"Rendered the template at {template_path}.")

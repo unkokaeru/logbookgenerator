@@ -48,9 +48,7 @@ def main() -> None:
         config = load_yaml(config_file)
 
     # Parse through the input directory
-    weekly_files, references = parse_input_directory(user_arguments["input_directory"])
-    # TODO: Generalise functions to re-use for coursework generation
-    # Issue URL: https://github.com/unkokaeru/logbookgenerator/issues/1
+    weekly_files, coursework, references = parse_input_directory(user_arguments["input_directory"])
 
     # Create the template contexts
     logbook_contexts = generate_logbook_contexts(config, weekly_files, references)

@@ -48,6 +48,7 @@ class Constants:
     ID_REGEX_FORMAT: str = r"^\d{8}$"
     DATE_REGEX_FORMAT: str = r"^\d{4}-\d{2}-\d{2}$"
     DATE_DATETIME_FORMAT: str = "%Y-%m-%d"
+    COURSEWORK_REGEX: str = r"e\d{2}-coursework-(.*)"
 
     # Config file constants
     DEFAULT_MODULE_CODE: str = "MTH2008"

@@ -105,10 +105,6 @@ def validate_input_directory(input_directory: Path) -> None:
     Validates an expected structure of:
     ```
     input_directory/
-    ├── coursework/
-    |   ├── coursework1.cpp
-    |   ├── coursework2.cpp
-    |   └── ...
     ├── week 1/
     |   ├── e01-some_text-some_text.cpp
     |   ├── l01-some_text-some_text.cpp
@@ -150,18 +146,6 @@ def validate_input_directory(input_directory: Path) -> None:
         if not week_files:
             logger.error(f"Week directory {week_directory} does not have any week files.")
             raise ValueError(f"Week directory {week_directory} does not have any week files.")
-
-    # Check if there is a coursework directory
-    coursework_directory = input_directory / "coursework"
-    if not coursework_directory.exists():
-        logger.warning(f"Weeks directory {input_directory} does not have a coursework directory.")
-
-    # Check if there is a coursework file
-    coursework_files = list(coursework_directory.glob("*.cpp"))
-    if not coursework_files:
-        logger.warning(
-            f"Coursework directory {coursework_directory} does not have any coursework files."
-        )
 
     # Check if there is a references file
     references_file = input_directory / "references.yaml"

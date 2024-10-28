@@ -13,7 +13,7 @@ logger = logger.getChild(__name__)
 
 def parse_weekly_directories(
     input_directory: Path,
-) -> tuple[list[dict[str, dict[str, str] | str]], list[dict[str, str]]]:
+) -> tuple[list[dict[str, dict[str, str] | str]], dict[str, str]]:
     """
     Parse the weeks directory.
 
@@ -24,14 +24,14 @@ def parse_weekly_directories(
 
     Returns
     -------
-    tuple[list[dict[str, dict[str, str] | str]], list[dict[str, str]]]
+    tuple[list[dict[str, dict[str, str] | str]], dict[str, str]]
         The CPP files and reflections for each week, given as a list of weeks,
         where each week has keys "cpp" and "reflection", each containing a
         dictionary of files or a string respectively.
         Also returns the coursework files.
     """
     weeks_files: list[dict[str, dict[str, str] | str]] = []
-    coursework_files: list[dict[str, str]] = []
+    coursework_files: dict[str, str] = {}
 
     # Get the weeks, organised chronologically so that the dictionary is ordered
     weeks = sorted(
@@ -64,7 +64,7 @@ def parse_weekly_directories(
                 # Check if the file is coursework
                 if match := re.match(Constants.COURSEWORK_REGEX, file_path.stem):
                     # Add the coursework file to the list
-                    coursework_files.append({match.group(1): file_contents})
+                    coursework_files[match.group(1)] = file_contents
                     logger.debug(f"Added file {file_path} to coursework")
 
         # Parse reflection
@@ -81,7 +81,7 @@ def parse_weekly_directories(
 
 def parse_input_directory(
     input_directory: Path,
-) -> tuple[list[dict[str, dict[str, str] | str]], list[dict[str, str]], list[dict[str, str]]]:
+) -> tuple[list[dict[str, dict[str, str] | str]], dict[str, str], list[dict[str, str]]]:
     """
     Parse the input directory.
 
@@ -92,7 +92,7 @@ def parse_input_directory(
 
     Returns
     -------
-    tuple[list[dict[str, dict[str, str] | str]], list[dict[str, str]], list[dict[str, str]]]
+    tuple[list[dict[str, dict[str, str] | str]], dict[str, str], list[dict[str, str]]]
         The weekly files (code and reflections), coursework files, and references.
     """
     logger.debug(f"Reading weeks from {input_directory}")

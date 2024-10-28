@@ -97,7 +97,9 @@ def process_block_comment(
     return [], [], task_comments
 
 
-def process_code_comments(code_lines: list[str]) -> dict[str, list[tuple[str, str]]] | str:
+def process_code_comments(
+    code_lines: list[str], remove_comments: bool = False
+) -> tuple[dict[str, list[tuple[str, str]]] | str, str | None]:
     """
     Process the C++ code to extract answer comments and related code.
 
@@ -105,19 +107,34 @@ def process_code_comments(code_lines: list[str]) -> dict[str, list[tuple[str, st
     ----------
     code_lines : list[str]
         The code lines.
+    remove_comments : bool, optional
+        Whether to remove comments from the code, by default False
 
     Returns
     -------
-    dict[str, list[tuple[str, str]]] | str
-        A dictionary where keys are task identifiers and values are lists of tuples
-        containing comments and associated code.
+    tuple[dict[str, list[tuple[str, str]]] | str, str | None]
+        The task comments, or the code as a string, and any remaining code lines,
+        if remove_comments is True.
+
+    Notes
+    -----
+    The resulting dictionary is in the form:
+    {
+        "task_{task_number}_{subtask_number}": [
+            ("The comment", "The associated code"),
+            ...
+        ],
+        ...
+    }
     """
     task_comments: dict[str, list[tuple[str, str]]] = {}
     current_code_lines: list[str] = []
+    cleaned_code_lines: list[str] = []
     line_number = 0
 
     while line_number < len(code_lines):
-        line = code_lines[line_number].strip()
+        raw_line = code_lines[line_number]
+        line = raw_line.strip()
         logger.debug(f"Processing line: {line}")
 
         if line.startswith(Constants.BLOCK_COMMENT_START):
@@ -135,13 +152,17 @@ def process_code_comments(code_lines: list[str]) -> dict[str, list[tuple[str, st
         else:
             logger.debug("Code line found")
             current_code_lines.append(line)
+            if remove_comments:
+                cleaned_code_lines.append(raw_line)
 
         line_number += 1
         logger.debug(f"Current code lines: {current_code_lines}")
 
     if task_comments:
         logger.debug(f"Task comments: {task_comments}")
-        return task_comments
+        return task_comments, ("\n".join(cleaned_code_lines) if remove_comments else None)
 
     logger.warning("No answer comments found, returning code as string")
-    return "\n".join(current_code_lines)
+    original_code = "\n".join(code_lines)
+
+    return original_code, (original_code if remove_comments else None)

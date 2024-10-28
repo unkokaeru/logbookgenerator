@@ -110,3 +110,37 @@ def create_logbook(logbook_contexts: dict[str, Any]) -> str:
     )
 
     return logbook_markdown
+
+
+def create_coursework(coursework_context: dict[str, Any]) -> str:
+    """
+    Create the coursework from the context.
+
+    Parameters
+    ----------
+    coursework_context : dict
+        The contexts to render into the coursework.
+
+    Notes
+    -----
+    This function renders each part of the coursework and then combines them into
+    the final markdown coursework.
+    """
+    logger.debug("Rendering the coursework.")
+    coursework_markdown = ""
+
+    for file_name, file_context in coursework_context.items():
+        logger.debug(f"Rendering coursework for {file_name}.")
+        coursework_markdown += (
+            render_template(
+                Paths.TEMPLATES_PATH / "coursework.md.j2",
+                {
+                    "file_name": file_name,
+                    "tasks": file_context,
+                },
+            )
+            + "\n\n"
+        )
+        logger.debug(f"Rendered coursework for {file_name}.")
+
+    return coursework_markdown

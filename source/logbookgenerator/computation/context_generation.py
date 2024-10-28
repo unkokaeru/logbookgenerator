@@ -46,7 +46,7 @@ def generate_tasks_context(cpp_files: dict[str, str]) -> dict[str, Any]:
 
         # Process the file content
         code_lines = file_content.splitlines()
-        task_code_explanations = process_code_comments(code_lines)
+        task_code_explanations = process_code_comments(code_lines)[0]
 
         tasks_context[task_type][task_number] = {
             "topic": task_topic,
@@ -138,11 +138,61 @@ def generate_weeks_context(
     return weeks_context
 
 
+def generate_coursework_context(
+    coursework_files: dict[str, str]
+) -> tuple[dict[str, Any], dict[str, str]]:
+    """
+    Generate the coursework context.
+
+    Parameters
+    ----------
+    coursework_files: dict[str, str]
+        The coursework files.
+
+    Returns
+    -------
+    tuple[dict[str, Any], dict[str, str]]
+        The coursework context and clean codes.
+
+    Notes
+    -----
+    The clean code is the code without any comments.
+    The coursework context is a dictionary in the form:
+    {
+        "file_name": {
+            "task_{task_number}_{subtask_number}": [
+                ("The comment", "The associated code"),
+                ...
+            ],
+            ...
+        },
+        ...
+    }
+    """
+    coursework_context: dict[str, Any] = {}
+    clean_codes: dict[str, str] = {}
+
+    for file_name, file_code in coursework_files.items():
+        logger.debug(f"Processing coursework file: {file_name}.")
+
+        coursework_context[file_name], clean_codes[file_name] = (
+            process_code_comments(  # type: ignore
+                file_code.splitlines(),
+                remove_comments=True,
+            )
+        )
+        logger.debug(f"Coursework context: {coursework_context[file_name]}")
+        logger.debug(f"Clean code: {clean_codes[file_name]}")
+
+    return coursework_context, clean_codes  # type: ignore
+
+
 def generate_logbook_contexts(
     config: dict[str, Any],
     weekly_files: list[dict[str, dict[str, str] | str]],
+    coursework_files: dict[str, str],
     references: list[dict[str, str]],
-) -> dict[str, Any]:
+) -> tuple[dict[str, Any], dict[str, Any] | None, dict[str, str] | None]:
     """
     Generate the contexts for the logbook.
 
@@ -152,13 +202,15 @@ def generate_logbook_contexts(
         The configuration file.
     weekly_files: list[dict[str, dict[str, str] | str]]
         The weekly files, containing the CPP files and reflections.
+    coursework_files: dict[str, str]
+        The coursework files.
     references : list[dict[str, str]]
         The references.
 
     Returns
     -------
-    dict[str, Any]
-        The logbook contexts.
+    tuple[dict[str, Any], dict[str, Any] | None, dict[str, str] | None]
+        The logbook contexts, coursework context, and clean coursework code.
     """
     logbook_contexts: dict[str, Any] = {}
 
@@ -173,7 +225,16 @@ def generate_logbook_contexts(
     logbook_contexts["weeks"] = generate_weeks_context(weekly_files, start_date)
     logger.debug(f"Weeks context: {logbook_contexts["weeks"]}")
 
+    if coursework_files:
+        logger.debug("Generating coursework context...")
+        coursework_context, clean_coursework_code = generate_coursework_context(coursework_files)
+        logger.debug(f"Coursework context: {coursework_context}")
+
     logbook_contexts["references"] = references
     logger.debug(f"References context: {logbook_contexts["references"]}")
 
-    return logbook_contexts
+    return (
+        logbook_contexts,
+        coursework_context if coursework_context else None,
+        clean_coursework_code if clean_coursework_code else None,
+    )

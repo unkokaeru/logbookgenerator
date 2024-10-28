@@ -52,3 +52,19 @@ def save_file(file_path: Path, file_content: str) -> None:
     with open(file_path, "w") as file:
         logger.debug(f"Saving file: {file_path}")
         file.write(file_content)
+
+
+def create_clean_code_files(coursework_path: Path, clean_code: dict[str, str]) -> None:
+    """
+    Create the clean code files.
+
+    Parameters
+    ----------
+    coursework_path : Path
+        Path to the coursework directory.
+    clean_code : dict[str, str]
+        The clean code files.
+    """
+    for file_name, file_content in clean_code.items():
+        save_file(coursework_path / file_name, file_content)
+        logger.info(f"Clean code file created: {file_name} in {coursework_path}.")

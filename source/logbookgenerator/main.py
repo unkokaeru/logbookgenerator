@@ -1,18 +1,19 @@
 """main.py: Called when the package is ran as a script."""
 
 from logging import shutdown as shutdown_logging
+from pathlib import Path
 
 from yaml import YAMLError
 
 from .computation.config_generation import build_config_file
 from .computation.context_generation import generate_logbook_contexts
 from .computation.parsing import parse_input_directory
-from .computation.render_context import create_logbook
+from .computation.render_context import create_coursework, create_logbook
 from .config.constants import Constants
 from .config.paths import cleanup_temporary_files
 from .interface.command_line import command_line_interface
 from .logs.setup_logging import setup_logging
-from .utilities.file_handling import load_yaml, save_file
+from .utilities.file_handling import create_clean_code_files, load_yaml, save_file
 from .utilities.validation import validate_input_directory
 
 
@@ -51,10 +52,22 @@ def main() -> None:
     weekly_files, coursework, references = parse_input_directory(user_arguments["input_directory"])
 
     # Create the template contexts
-    logbook_contexts = generate_logbook_contexts(config, weekly_files, references)
+    logbook_contexts, coursework_context, clean_code = generate_logbook_contexts(
+        config, weekly_files, coursework, references
+    )
 
     # Create the logbook
     logbook_markdown = create_logbook(logbook_contexts)
+
+    # Create the coursework files
+    if clean_code and coursework_context:
+        coursework_path = Path(user_arguments["output_file"].parent / "coursework")
+
+        create_clean_code_files(coursework_path / "code", clean_code)
+
+        coursework_markdown = create_coursework(coursework_context)
+
+        save_file(coursework_path / "coursework.md", coursework_markdown)
 
     # Write the logbook to the output file
     save_file(user_arguments["output_file"], logbook_markdown)

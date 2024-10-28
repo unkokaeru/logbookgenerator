@@ -184,7 +184,7 @@ def generate_coursework_context(
         logger.debug(f"Coursework context: {coursework_context[file_name]}")
         logger.debug(f"Clean code: {clean_codes[file_name]}")
 
-    return coursework_context, clean_codes  # type: ignore
+    return coursework_context, clean_codes
 
 
 def generate_logbook_contexts(

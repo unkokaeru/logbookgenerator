@@ -70,5 +70,5 @@ class Constants:
     BLOCK_COMMENT_MIDDLE: str = "*"
     COMMENT_END: str = "*/"
     ANSWER_ID_DELIMITERS: str = "()"
-    INLINE_ANSWER_COMMENT: str = f"{ANSWER_KEYWORD} {r'\((\w+)) (\d+).(\d+)\): (.+)'}"
+    INLINE_ANSWER_COMMENT: str = f"{ANSWER_KEYWORD} {r'\((\w+) (\d+)\.(\d+)\): (.+)'}"
     CODE_COMMENT_DELIMITER: str = "```"

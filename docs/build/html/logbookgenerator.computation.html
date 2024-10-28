@@ -66,20 +66,34 @@ containing comments and associated code.</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="logbookgenerator.computation.code_processing.process_code_comments">
-<span class="sig-prename descclassname"><span class="pre">logbookgenerator.computation.code_processing.</span></span><span class="sig-name descname"><span class="pre">process_code_comments</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code_lines</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></span><a class="headerlink" href="#logbookgenerator.computation.code_processing.process_code_comments" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">logbookgenerator.computation.code_processing.</span></span><span class="sig-name descname"><span class="pre">process_code_comments</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code_lines</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remove_comments</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#logbookgenerator.computation.code_processing.process_code_comments" title="Link to this definition">¶</a></dt>
 <dd><p>Process the C++ code to extract answer comments and related code.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>code_lines</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – The code lines.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>code_lines</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – The code lines.</p></li>
+<li><p><strong>remove_comments</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to remove comments from the code, by default False</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A dictionary where keys are task identifiers and values are lists of tuples
-containing comments and associated code.</p>
+<dd class="field-even"><p>The task comments, or the code as a string, and any remaining code lines,
+if remove_comments is True.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>dict[str, list[tuple[str, str]]] | str</p>
+<dd class="field-odd"><p>tuple[dict[str, list[tuple[str, str]]] | str, str | None]</p>
 </dd>
 </dl>
+<p class="rubric">Notes</p>
+<p>The resulting dictionary is in the form:
+{</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“task_{task_number}_{subtask_number}”: [</dt><dd><p>(“The comment”, “The associated code”),
+…</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>}</p>
 </dd></dl>
 
 <dl class="py function">
@@ -230,22 +244,55 @@ start: &lt;university_start&gt;</p>
 <span id="logbookgenerator-computation-context-generation-module"></span><h2>logbookgenerator.computation.context_generation module<a class="headerlink" href="#module-logbookgenerator.computation.context_generation" title="Link to this heading">¶</a></h2>
 <p>context_generation.py: Contains the functions for generating the context for the logbook.</p>
 <dl class="py function">
+<dt class="sig sig-object py" id="logbookgenerator.computation.context_generation.generate_coursework_context">
+<span class="sig-prename descclassname"><span class="pre">logbookgenerator.computation.context_generation.</span></span><span class="sig-name descname"><span class="pre">generate_coursework_context</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coursework_files</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#logbookgenerator.computation.context_generation.generate_coursework_context" title="Link to this definition">¶</a></dt>
+<dd><p>Generate the coursework context.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>coursework_files</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>str</em><em>]</em>) – The coursework files.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The coursework context and clean codes.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple[dict[str, Any], dict[str, str]]</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The clean code is the code without any comments.
+The coursework context is a dictionary in the form:
+{</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“file_name”: {</dt><dd><dl class="simple">
+<dt>“task_{task_number}_{subtask_number}”: [</dt><dd><p>(“The comment”, “The associated code”),
+…</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</div></blockquote>
+<p>}</p>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="logbookgenerator.computation.context_generation.generate_logbook_contexts">
-<span class="sig-prename descclassname"><span class="pre">logbookgenerator.computation.context_generation.</span></span><span class="sig-name descname"><span class="pre">generate_logbook_contexts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weekly_files</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">references</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#logbookgenerator.computation.context_generation.generate_logbook_contexts" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">logbookgenerator.computation.context_generation.</span></span><span class="sig-name descname"><span class="pre">generate_logbook_contexts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weekly_files</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coursework_files</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">references</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#logbookgenerator.computation.context_generation.generate_logbook_contexts" title="Link to this definition">¶</a></dt>
 <dd><p>Generate the contexts for the logbook.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>config</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em>) – The configuration file.</p></li>
 <li><p><strong>weekly_files</strong> (<em>list</em><em>[</em><em>dict</em><em>[</em><em>str</em><em>, </em><em>dict</em><em>[</em><em>str</em><em>, </em><em>str</em><em>] </em><em>| </em><em>str</em><em>]</em><em>]</em>) – The weekly files, containing the CPP files and reflections.</p></li>
+<li><p><strong>coursework_files</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>str</em><em>]</em>) – The coursework files.</p></li>
 <li><p><strong>references</strong> (<em>list</em><em>[</em><em>dict</em><em>[</em><em>str</em><em>, </em><em>str</em><em>]</em><em>]</em>) – The references.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The logbook contexts.</p>
+<dd class="field-even"><p>The logbook contexts, coursework context, and clean coursework code.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>dict[str, Any]</p>
+<dd class="field-odd"><p>tuple[dict[str, Any], dict[str, Any] | None, dict[str, str] | None]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -315,24 +362,24 @@ start: &lt;university_start&gt;</p>
 <p>parsing.py: Contains the functions for parsing the input directory.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="logbookgenerator.computation.parsing.parse_input_directory">
-<span class="sig-prename descclassname"><span class="pre">logbookgenerator.computation.parsing.</span></span><span class="sig-name descname"><span class="pre">parse_input_directory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_directory</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#logbookgenerator.computation.parsing.parse_input_directory" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">logbookgenerator.computation.parsing.</span></span><span class="sig-name descname"><span class="pre">parse_input_directory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_directory</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#logbookgenerator.computation.parsing.parse_input_directory" title="Link to this definition">¶</a></dt>
 <dd><p>Parse the input directory.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>input_directory</strong> (<em>Path</em>) – Path to the input directory.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The weekly files (code and reflections) and the references.</p>
+<dd class="field-even"><p>The weekly files (code and reflections), coursework files, and references.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>tuple[list[dict[str, dict[str, str] | str]], list[dict[str, str]]]</p>
+<dd class="field-odd"><p>tuple[list[dict[str, dict[str, str] | str]], dict[str, str], list[dict[str, str]]]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="logbookgenerator.computation.parsing.parse_weekly_directories">
-<span class="sig-prename descclassname"><span class="pre">logbookgenerator.computation.parsing.</span></span><span class="sig-name descname"><span class="pre">parse_weekly_directories</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_directory</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#logbookgenerator.computation.parsing.parse_weekly_directories" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">logbookgenerator.computation.parsing.</span></span><span class="sig-name descname"><span class="pre">parse_weekly_directories</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_directory</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#logbookgenerator.computation.parsing.parse_weekly_directories" title="Link to this definition">¶</a></dt>
 <dd><p>Parse the weeks directory.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -341,10 +388,11 @@ start: &lt;university_start&gt;</p>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The CPP files and reflections for each week, given as a list of weeks,
 where each week has keys “cpp” and “reflection”, each containing a
-dictionary of files or a string respectively.</p>
+dictionary of files or a string respectively.
+Also returns the coursework files.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>list[dict[str, dict[str, str] | str]]</p>
+<dd class="field-odd"><p>tuple[list[dict[str, dict[str, str] | str]], dict[str, str]]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -353,6 +401,20 @@ dictionary of files or a string respectively.</p>
 <section id="module-logbookgenerator.computation.render_context">
 <span id="logbookgenerator-computation-render-context-module"></span><h2>logbookgenerator.computation.render_context module<a class="headerlink" href="#module-logbookgenerator.computation.render_context" title="Link to this heading">¶</a></h2>
 <p>render_context.py: Contains the logic for rendering the context into a logbook.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="logbookgenerator.computation.render_context.create_coursework">
+<span class="sig-prename descclassname"><span class="pre">logbookgenerator.computation.render_context.</span></span><span class="sig-name descname"><span class="pre">create_coursework</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coursework_context</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#logbookgenerator.computation.render_context.create_coursework" title="Link to this definition">¶</a></dt>
+<dd><p>Create the coursework from the context.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>coursework_context</strong> (<em>dict</em>) – The contexts to render into the coursework.</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>This function renders each part of the coursework and then combines them into
+the final markdown coursework.</p>
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="logbookgenerator.computation.render_context.create_logbook">
 <span class="sig-prename descclassname"><span class="pre">logbookgenerator.computation.render_context.</span></span><span class="sig-name descname"><span class="pre">create_logbook</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logbook_contexts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#logbookgenerator.computation.render_context.create_logbook" title="Link to this definition">¶</a></dt>

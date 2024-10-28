@@ -40,6 +40,20 @@
 <span id="logbookgenerator-utilities-file-handling-module"></span><h2>logbookgenerator.utilities.file_handling module<a class="headerlink" href="#module-logbookgenerator.utilities.file_handling" title="Link to this heading">¶</a></h2>
 <p>file_handling.py: Contains functions for handling files.</p>
 <dl class="py function">
+<dt class="sig sig-object py" id="logbookgenerator.utilities.file_handling.create_clean_code_files">
+<span class="sig-prename descclassname"><span class="pre">logbookgenerator.utilities.file_handling.</span></span><span class="sig-name descname"><span class="pre">create_clean_code_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coursework_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clean_code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#logbookgenerator.utilities.file_handling.create_clean_code_files" title="Link to this definition">¶</a></dt>
+<dd><p>Create the clean code files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>coursework_path</strong> (<em>Path</em>) – Path to the coursework directory.</p></li>
+<li><p><strong>clean_code</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>str</em><em>]</em>) – The clean code files.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="logbookgenerator.utilities.file_handling.load_yaml">
 <span class="sig-prename descclassname"><span class="pre">logbookgenerator.utilities.file_handling.</span></span><span class="sig-name descname"><span class="pre">load_yaml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">yaml_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#logbookgenerator.utilities.file_handling.load_yaml" title="Link to this definition">¶</a></dt>
 <dd><p>Load the YAML file.</p>
@@ -113,10 +127,6 @@
 <p>Validates an expected structure of:
 <code class="docutils literal notranslate"><span class="pre">`</span>
 <span class="pre">input_directory/</span>
-<span class="pre">├──</span> <span class="pre">coursework/</span>
-<span class="pre">|</span>&#160;&#160; <span class="pre">├──</span> <span class="pre">coursework1.cpp</span>
-<span class="pre">|</span>&#160;&#160; <span class="pre">├──</span> <span class="pre">coursework2.cpp</span>
-<span class="pre">|</span>&#160;&#160; <span class="pre">└──</span> <span class="pre">...</span>
 <span class="pre">├──</span> <span class="pre">week</span> <span class="pre">1/</span>
 <span class="pre">|</span>&#160;&#160; <span class="pre">├──</span> <span class="pre">e01-some_text-some_text.cpp</span>
 <span class="pre">|</span>&#160;&#160; <span class="pre">├──</span> <span class="pre">l01-some_text-some_text.cpp</span>

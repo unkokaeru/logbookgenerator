@@ -9,6 +9,12 @@
 
 ### Features
 
+* Prototype coursework. [unkokaeru]
+
+* Prototype coursework generation and rendering. [unkokaeru]
+
+* Add coursework parsing. [unkokaeru]
+
 * Add saving. [unkokaeru]
 
 * Add markdown rendering. [unkokaeru]
@@ -32,6 +38,12 @@
 * Add config. [unkokaeru]
 
 ### Fixes
+
+* Remove excess type ignore. [unkokaeru]
+
+* Remove old coursework directory structure validation. [unkokaeru]
+
+* Whitespace after newline. [unkokaeru]
 
 * Standardise section separation. [unkokaeru]
 
@@ -84,6 +96,14 @@
 * Logging. [unkokaeru]
 
 ### Chore
+
+* Update requirement files. [unkokaeru]
+
+* Update lock file. [unkokaeru]
+
+* Bump version from 1.0.10 to 1.0.11. [unkokaeru]
+
+* Update changelog. [unkokaeru]
 
 * Bump version from 1.0.9 to 1.0.10. [unkokaeru]
 

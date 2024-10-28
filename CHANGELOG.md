@@ -39,6 +39,8 @@
 
 ### Fixes
 
+* Inline answer regex. [unkokaeru]
+
 * Remove excess type ignore. [unkokaeru]
 
 * Remove old coursework directory structure validation. [unkokaeru]
@@ -96,6 +98,10 @@
 * Logging. [unkokaeru]
 
 ### Chore
+
+* Bump version from 1.0.11 to 1.0.12. [unkokaeru]
+
+* Update changelog. [unkokaeru]
 
 * Update requirement files. [unkokaeru]
 

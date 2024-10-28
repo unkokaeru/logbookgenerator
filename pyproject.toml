@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "logbookgenerator"
-version = "1.0.12"
+version = "1.0.13"
 description = "Generates a logbook. Designed for the University of Lincoln's Scientific Computing module."
 authors = ["William Fayers <william@fayers.com>"]
 license = "MIT"

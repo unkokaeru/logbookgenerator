@@ -1,6 +1,6 @@
 """Config package for the project."""
 
-__version__ = "1.0.14"
+__version__ = "1.0.15"
 
 import logging
 

@@ -39,6 +39,8 @@
 
 ### Fixes
 
+* Inline comment regex group handling. [unkokaeru]
+
 * Inline answer regex. [unkokaeru]
 
 * Remove excess type ignore. [unkokaeru]
@@ -98,6 +100,14 @@
 * Logging. [unkokaeru]
 
 ### Chore
+
+* Update requirement files. [unkokaeru]
+
+* Update lock file. [unkokaeru]
+
+* Bump version from 1.0.12 to 1.0.13. [unkokaeru]
+
+* Update changelog. [unkokaeru]
 
 * Bump version from 1.0.11 to 1.0.12. [unkokaeru]
 

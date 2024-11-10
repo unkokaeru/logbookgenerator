@@ -66,5 +66,5 @@ def create_clean_code_files(coursework_path: Path, clean_code: dict[str, str]) -
         The clean code files.
     """
     for file_name, file_content in clean_code.items():
-        save_file(coursework_path / file_name, file_content)
+        save_file(coursework_path / f"{file_name}.cpp", file_content)
         logger.info(f"Clean code file created: {file_name} in {coursework_path}.")

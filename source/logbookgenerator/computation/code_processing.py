@@ -44,8 +44,8 @@ def process_inline_comment(
         logger.debug(f"No match found for inline comment: {comment_line}")
         return "", [], task_comments
 
-    comment_id = f"task_{match.group(1)}_{match.group(2)}"
-    comment_content = match.group(3).strip()
+    comment_id = f"{match.group(1)}_{match.group(2)}_{match.group(3)}"
+    comment_content = match.group(4).strip()
     logger.debug(f"Comment ID: {comment_id}, Comment content: {comment_content}")
 
     task_comments.setdefault(comment_id, [])

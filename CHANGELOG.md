@@ -39,6 +39,8 @@
 
 ### Fixes
 
+* Cpp files have extension. [unkokaeru]
+
 * Inline comment regex group handling. [unkokaeru]
 
 * Inline answer regex. [unkokaeru]
@@ -100,6 +102,10 @@
 * Logging. [unkokaeru]
 
 ### Chore
+
+* Bump version from 1.0.13 to 1.0.14. [unkokaeru]
+
+* Update changelog. [unkokaeru]
 
 * Update requirement files. [unkokaeru]
 
